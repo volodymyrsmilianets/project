@@ -1,0 +1,18 @@
+{% extends 'pizzaapp/base.html' %}
+{% block title %}{{ category.name }}{% endblock %}
+{% block content %}
+<h1>Категорія: {{ category.name }}</h1>
+<div class="products">
+  {% for prod in products %}
+  <div class="product-card">
+    <a href="{% url 'product_detail' prod.id %}">
+      <img src="{{ prod.image.url }}" alt="{{ prod.name }}" width="150">
+      <h3>{{ prod.name }}</h3>
+      <p>{{ prod.price }} ₴</p>
+    </a>
+  </div>
+  {% empty %}
+    <p>Немає товарів у цій категорії.</p>
+  {% endfor %}
+</div>
+{% endblock %}

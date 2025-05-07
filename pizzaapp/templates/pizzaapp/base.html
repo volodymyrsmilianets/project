@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Піцерія{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="{% url 'index' %}">Головна</a> |
+            {% if user.is_authenticated %}
+                Привіт, {{ user.username }} |
+                <a href="{% url 'view_cart' %}">Кошик</a> |
+                <a href="{% url 'logout' %}">Вийти</a>
+            {% else %}
+                <a href="{% url 'login' %}">Увійти</a> |
+                <a href="{% url 'register' %}">Реєстрація</a> |
+                <a href="{% url 'view_cart' %}">Кошик</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Піцерія</p>
+    </footer>
+</body>
+</html>

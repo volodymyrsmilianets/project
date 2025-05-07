@@ -1,0 +1,31 @@
+{% extends 'pizzaapp/base.html' %}
+{% block title %}Кошик{% endblock %}
+
+{% block content %}
+<h1>Кошик</h1>
+
+{% if items %}
+  <ul>
+  {% for item in items %}
+    <li>
+      {{ item.product.name }} —
+      {{ item.quantity }} × {{ item.product.price }} ₴ =
+      {{ item.subtotal }} ₴
+      <a href="{% url 'remove_from_cart' item.product.id %}">[видалити]</a>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <p><strong>Всього:</strong> {{ total }} ₴</p>
+
+  <!-- Кнопка оформити замовлення -->
+  <form action="{% url 'create_order' %}" method="post" style="margin-top: 1em;">
+    {% csrf_token %}
+    <button type="submit">Оформити замовлення</button>
+  </form>
+
+{% else %}
+  <p>Кошик порожній.</p>
+{% endif %}
+
+{% endblock %}

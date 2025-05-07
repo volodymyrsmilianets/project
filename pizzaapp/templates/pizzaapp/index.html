@@ -1,0 +1,16 @@
+{% extends 'pizzaapp/base.html' %}
+{% block title %}Категорії{% endblock %}
+{% block content %}
+<h1>Категорії</h1>
+<ul>
+  {% for cat in categories %}
+    <li>
+      <a href="{% url 'category_products' cat.id %}">
+        {{ cat.name }}
+      </a>
+    </li>
+  {% empty %}
+    <li>Немає категорій.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
